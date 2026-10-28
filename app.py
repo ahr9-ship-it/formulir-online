@@ -1,19 +1,51 @@
-import streamlit as st
-st. set_page_config(page_title="formulir online" ,page_icon="📝")
-st.title("📝 formulir onlie")
-st.write("jujur itu bagus, jawab ya!.")
-with st.form("formulir_kamu"):
-    nama = st.text_input("nama lengkap")
-    umur = st.number_input("umur" ,
-                           min_value=1 ,
-    max_value=30 ,step=1)
-    pesan = st.text_area("pesan atau jawaban kamu")
-    kirim = st.form_submit_button("kirm jawaban")
-if kirim:
-    if nama.strip() and pesan.strip():
-        st.success("tengkyu besti ini lagi belajar aja.")
-        st.write("Nama:", nama)
-        st.write("Umur:", umur)
-        st.write("Pesan:", pesan)
-    else:
-        st.warning("isi nama dan pesan terlebih dahulu.")
+const SHEET_ID = "https://docs.google.com/spreadsheets/d/1zSe2_2rkbQ-2WVBH74kJDZLJPWLjhNmdl9w3tbSMmU4/edit?gid=0#gid=0";
+const SHEET_NAME = "Jawaban"
+
+function doPost(e) {
+    try {
+      const data = JSON.parse(e.postData.contents);
+
+      const sheet = SpreadsheetApp
+          .openById(SHEET_ID)
+          .getSheetByName(SHEET_NAME);
+      
+      if (!sheet){
+        throw new Error("Sheet Jawaban Tidak Ditemukan.")
+      }
+
+      if (sheet.getLastRow() === 0) {
+        sheet.appendRow([
+          "Waktu",
+          "Nama",
+          "First",
+          "Now",
+          "Message",
+          "Memory",
+          "Advice",
+          "secret"
+        ]);
+      }
+
+      sheet.appendRow([
+        new Date (),
+        data.nama || "Anonim",
+        data.first || "",
+        data.now || "",
+        data.message || "",
+        data.memory || "",
+        data.advive || "",
+        data.secret || ""
+      ]);
+
+      return ContentService
+        .createTextOutput(JSON.stringify({successs: true}))
+        .setMimeType(ContentSevice.MimeType.JSON);
+    
+    } catch (error){
+      return ContentService
+        .createTextOutput(JSON,stringify({
+          succes: false,
+          error: error.message
+        }))
+        . setMimeType(ContentService.MimeType,JSON); }
+        }
