@@ -1,4 +1,4 @@
-const SHEET_ID = "https://docs.google.com/spreadsheets/d/1zSe2_2rkbQ-2WVBH74kJDZLJPWLjhNmdl9w3tbSMmU4/edit?usp=sharing";
+const SHEET_ID = "1zSe2_2rkbQ-2WVBH74kJDZLJPWLjhNmdl9w3tbSMmU4";
 const SHEET_NAME = "Jawaban"
 
 function doPost(e) {
