@@ -1,7 +1,7 @@
 import streamlit as st
 st. set_page_config(page_title="formulir online" ,page_icon="📝")
 st.title("📝 formulir onlie")
-st.write("jujur itu bagus, jawab ya!.)
+st.write("jujur itu bagus, jawab ya!.")
 with st.form("formulir_kamu"):
     nama = st.text_input("nama lengkap")
     umur = st.number_input("umur" ,min_value=1 ,max-value=30 ,step=1)
