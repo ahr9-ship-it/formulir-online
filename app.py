@@ -6,7 +6,7 @@ with st.form("formulir_kamu"):
     nama = st.text_input("nama lengkap")
     umur = st.number_input("umur" ,
                            min_value=1 ,
-                         max-value=30 ,step=1)
+    max_value=30 ,step=1)
     pesan = st.text_area("pesan atau jawaban kamu")
     kirim = st.form_submit_button("kirm jawaban")
 if kirim:
